@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var danhSachSinhVien = [
+            "Nguyen Van A",
+            "Tran Thi B",
+            "Le Van C",
+            "Pham Thi D",
+            "Hoang Van E",
+        ];
+        
+        console.log("Câu 1: Tách tên và họ riêng");
+        danhSachSinhVien.forEach(function (ten) {
+            var mangTenHo = ten.split(" ");
+            var ho = mangTenHo[0];
+            var tenConLai = mangTenHo.slice(1).join(" ");
+            console.log("Họ: " + ho + ", Tên: " + tenConLai);
+        });
+        
+        console.log("\nCâu 2: Thêm một sinh viên vào vị trí 2");
+        var tenSinhVienMoi = "Mai Thi F";
+        var viTriThem = 1;
+        danhSachSinhVien.splice(viTriThem, 0, tenSinhVienMoi);
+        console.log(danhSachSinhVien);
+        
+        console.log("\nCâu 3: Xoá sinh viên có tên 'Le Van C'");
+        var tenSinhVienCanXoa = "Le Van C";
+        var viTriXoa = danhSachSinhVien.indexOf(tenSinhVienCanXoa);
+        if (viTriXoa !== -1) {
+            danhSachSinhVien.splice(viTriXoa, 1);
+        }
+        console.log(danhSachSinhVien);
+        
+        console.log("\nCâu 4: Tìm kiếm theo tên 'Pham Thi D'");
+        var tenCanTim = "Pham Thi D";
+        var ketQuaTimKiem = danhSachSinhVien.filter(function (ten) {
+            return boDau(ten.toLowerCase()) === boDau(tenCanTim.toLowerCase());
+        });
+        console.log(ketQuaTimKiem);
+        
+        function boDau(str) {
+            var map = {
+                'a': 'á|à|ạ|ả|ã|â|ấ|ầ|ậ|ẩ|ẫ|ă|ắ|ằ|ặ|ẳ|ẵ',
+                'd': 'đ',
+                'e': 'é|è|ẹ|ẻ|ẽ|ê|ế|ề|ệ|ể|ễ',
+                'i': 'í|ì|ị|ỉ|ĩ',
+                'o': 'ó|ò|ọ|ỏ|õ|ô|ố|ồ|ộ|ổ|ỗ|ơ|ớ|ờ|ợ|ở|ỡ',
+                'u': 'ú|ù|ụ|ủ|ũ|ư|ứ|ừ|ự|ử|ữ',
+                'y': 'ý|ỳ|ỵ|ỷ|ỹ',
+            };
+        
+            for (var pattern in map) {
+                str = str.replace(new RegExp(map[pattern], 'g'), pattern);
+            }
+        
+            return str;
+        }
+        </script>
+</body>
+</html>

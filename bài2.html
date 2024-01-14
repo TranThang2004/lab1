@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Form Example</title>
+</head>
+<body>
+    <div id="app">
+        <form id="userForm">
+            <label for="userId">ID:</label>
+            <input type="number" id="userId" required>
+
+            <label for="userName">Tên:</label>
+            <input type="text" id="userName" required>
+
+            <label for="userGender">Giới tính:</label>
+            <select id="userGender" required>
+                <option value="1">Nu</option>
+                <option value="2">Nam</option>
+            </select>
+
+            <button type="button" onclick="addUser()">Add</button>
+        </form>
+
+        <ul id="target"></ul>
+    </div>
+
+    <script>
+        var users = [];
+
+        function addUser() {
+            var userIdInput = document.getElementById("userId");
+            var userNameInput = document.getElementById("userName");
+            var userGenderInput = document.getElementById("userGender");
+
+            var userId = parseInt(userIdInput.value);
+            var userName = userNameInput.value;
+            var userGender = parseInt(userGenderInput.value);
+
+            if (!userId || !userName || isNaN(userGender)) {
+                alert("Vui lòng điền đầy đủ thông tin.");
+                return;
+            }
+
+            var newUser = { id: userId, name: userName, gender: userGender };
+            users.push(newUser);
+
+            displayUsers();
+
+            // Reset form
+            document.getElementById("userForm").reset();
+        }
+
+        function displayUsers() {
+            var target = document.getElementById("target");
+
+            // Sử dụng phương thức map để tạo mảng HTML từ mảng users
+            var userHTML = users.map(function(user) {
+                var genderText = user.gender === 1 ? "nu" : "nam";
+                return `<li>${user.id} - ${user.name} - ${genderText}</li>`;
+            });
+
+            // Thêm mảng HTML vào phần tử ul
+            target.innerHTML = userHTML.join('');
+        }
+    </script>
+</body>
+</html>

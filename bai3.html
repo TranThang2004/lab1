@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 1 - JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        #output {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    
+    <label for="inputString">Nhập chuỗi:</label>
+    <input type="text" id="inputString">
+    <button onclick="convertToCamelCase()">Convert</button>
+
+    <div id="output"></div>
+
+    <script>
+        function convertToCamelCase() {
+            // Lấy giá trị từ ô nhập
+            var inputString = document.getElementById("inputString").value;
+
+            // Chuyển đổi sang format camelCase
+            var camelCaseString = convertToCamelCaseFormat(inputString);
+
+            // Hiển thị kết quả
+            displayOutput(camelCaseString);
+        }
+
+        function convertToCamelCaseFormat(input) {
+            // Loại bỏ khoảng trắng và ký tự đặc biệt, chuyển đổi sang camelCase
+            return input.replace(/[^\w\s]/g, '').split(' ').map(function(word, index) {
+                return index === 0 ? word.toLowerCase() : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+            }).join('');
+        }
+
+        function displayOutput(output) {
+            // Hiển thị kết quả
+            var outputElement = document.getElementById("output");
+            outputElement.textContent = "Output: " + output;
+        }
+    </script>
+</body>
+</html>
